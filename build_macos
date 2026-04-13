@@ -64,3 +64,13 @@ cd build/macos
 zip vesc_tool_free_macos.zip `ls | grep -v '\.zip$'`
 ls | grep -v '\.zip$' | xargs rm -rf
 cd ../..
+
+# Penguin
+qmake -config release "CONFIG += release_macos build_penguin"
+make clean
+make -j8
+rm -rf build/macos/obj
+cd build/macos
+zip vesc_tool_penguin_macos.zip `ls | grep -v '\.zip$'`
+ls | grep -v '\.zip$' | xargs rm -rf
+cd ../..

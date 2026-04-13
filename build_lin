@@ -113,3 +113,13 @@ zip vesc_tool_free_linux.zip `ls | grep -v '\.zip$'`
 ls | grep -v '\.zip$' | xargs rm
 cd ../..
 
+# Penguin
+qmake -config release "CONFIG += release_lin build_penguin"
+make clean
+make -j8
+rm -rf build/lin/obj
+cd build/lin
+zip vesc_tool_penguin_linux.zip `ls | grep -v '\.zip$'`
+ls | grep -v '\.zip$' | xargs rm
+cd ../..
+

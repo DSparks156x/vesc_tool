@@ -252,6 +252,8 @@ QString Utility::aboutText()
               "Bronze Version<br>"
           #elif defined(VER_FREE)
               "Free of Charge Version<br>"
+          #elif defined(VER_PENGUIN)
+              "Penguin Version<br>"
           #endif
               "&copy; Benjamin Vedder 2016 - 2026<br>"
               "<a href=\"mailto:benjamin@vedder.se\">benjamin@vedder.se</a><br>"

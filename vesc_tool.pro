@@ -317,6 +317,9 @@ build_original {
 } else:build_free {
     RESOURCES += res_free.qrc
     DEFINES += VER_FREE
+} else:build_penguin {
+    RESOURCES += res_penguin.qrc
+    DEFINES += VER_PENGUIN
 } else {
     RESOURCES += res_neutral.qrc
     DEFINES += VER_NEUTRAL

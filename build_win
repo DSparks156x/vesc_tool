@@ -84,3 +84,13 @@ zip vesc_tool_free_windows.zip vesc_tool*.exe
 ls | grep -v '\.zip$' | xargs rm
 cd ../..
 
+# Penguin
+/opt/mxe2/usr/bin/i686-w64-mingw32.static-qmake-qt5 -config release "CONFIG+=release_win build_penguin"
+make clean
+make -j8
+rm -rf build/win/obj
+cd build/win
+zip vesc_tool_penguin_windows.zip vesc_tool*.exe
+ls | grep -v '\.zip$' | xargs rm
+cd ../..
+
