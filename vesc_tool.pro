@@ -350,6 +350,10 @@ macx {
     QMAKE_APPLE_DEVICE_ARCHS = x86_64 arm64
 }
 
+win32 {
+    RC_ICONS = vesc_tool.ico
+}
+
 ios {
     QMAKE_INFO_PLIST = ios/Info.plist
     HEADERS += ios/src/setIosParameters.h

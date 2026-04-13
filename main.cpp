@@ -1015,6 +1015,8 @@ int main(int argc, char *argv[])
     QApplication *a = new QApplication(argc, argv);
     app = a;
 
+    a->setWindowIcon(QIcon(":/res/icon.svg"));
+
     addFonts();
 
     QmlUi *qml = new QmlUi;
@@ -1578,6 +1580,8 @@ int main(int argc, char *argv[])
     } else {
         QApplication *a = new QApplication(argc, argv);
         app = a;
+
+        a->setWindowIcon(QIcon(":/res/icon.svg"));
 
         addFonts();
 
