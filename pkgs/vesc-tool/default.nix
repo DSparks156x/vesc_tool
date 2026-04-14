@@ -17,6 +17,7 @@
   makeDesktopItem,
   stdenv,
   tree,
+  buildPackages,
 }:
 
 let
@@ -97,18 +98,18 @@ stdenv.mkDerivation {
   buildInputs = [ libsForQt5.qtbase ];
 
   nativeBuildInputs = [
-    cmake
-    libsForQt5.qtbase
-    libsForQt5.qtquickcontrols2
-    libsForQt5.qtgamepad
-    libsForQt5.qtconnectivity
-    libsForQt5.qtpositioning
-    libsForQt5.qtserialport
-    libsForQt5.qtgraphicaleffects
-    libsForQt5.wrapQtAppsHook
+    buildPackages.cmake
+    buildPackages.libsForQt5.qtbase
+    buildPackages.libsForQt5.qtquickcontrols2
+    buildPackages.libsForQt5.qtgamepad
+    buildPackages.libsForQt5.qtconnectivity
+    buildPackages.libsForQt5.qtpositioning
+    buildPackages.libsForQt5.qtserialport
+    buildPackages.libsForQt5.qtgraphicaleffects
+    buildPackages.libsForQt5.wrapQtAppsHook
 
     # Make the desktop icon work
-    copyDesktopItems
-    tree
+    buildPackages.copyDesktopItems
+    buildPackages.tree
   ];
 }

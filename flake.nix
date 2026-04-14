@@ -37,16 +37,16 @@
           src = self;
           gcc-arm-embedded-7 = nixpkgsOld.legacyPackages.${system}.gcc-arm-embedded-7;
         };
-        pkgsWin = import nixpkgs {
-          inherit system;
-          crossSystem = { config = "x86_64-w64-mingw32"; };
-          overlays = [ self.overlays.default ];
-        };
       in
       {
         packages = selfPkgs // {
           default = selfPkgs.vesc-tool;
-          vesc-tool-penguin-windows = pkgsWin.vesc-tool-penguin;
+          vesc-tool-penguin-windows = pkgs.pkgsCross.mingwW64.callPackage ./pkgs/vesc-tool {
+            inherit bldcSrc;
+            src = self;
+            gcc-arm-embedded-7 = nixpkgsOld.legacyPackages.${system}.gcc-arm-embedded-7;
+            kind = "penguin";
+          };
         };
 
         # For `nix fmt`
