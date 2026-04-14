@@ -34,6 +34,7 @@ let
       "silver" = "res/version/silver_v.svg";
       "gold" = "res/version/gold_v.svg";
       "platinum" = "res/version/platinum_v.svg";
+      "penguin" = "res/version/penguin_v.svg";
     }
     .${kind};
 
@@ -48,7 +49,7 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "VESC Tool ${kind}, an IDE for controlling and configuring VESC-compatible motor controllers and other devices.";
-    platforms = platforms.linux;
+    platforms = platforms.linux ++ platforms.windows;
   };
 
   desktopItems = [
@@ -66,7 +67,7 @@ stdenv.mkDerivation {
   inherit src;
 
   configurePhase = ''
-    qmake -config release "CONFIG += release_lin build_${kind}"
+    qmake -config release "CONFIG += ${if stdenv.hostPlatform.isWindows then "release_win" else "release_lin"} build_${kind}"
   '';
   buildPhase = ''
     mkdir -p ./res/firmwares/
@@ -79,13 +80,16 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p \
-      $out/bin \
-      $out/share/icons/hicolor/scalable/apps
+    mkdir -p $out/bin
 
-    cp build/lin/vesc_tool_* $out/bin/${executableName}
-    cp ${iconPath} $out/share/icons/hicolor/scalable/apps/vesc_tool_${kind}.svg
-    echo $desktopItems
+    if [ "${if stdenv.hostPlatform.isWindows then "1" else "0"}" = "1" ]; then
+      cp build/win/vesc_tool_*.exe $out/bin/${executableName}.exe
+    else
+      mkdir -p $out/share/icons/hicolor/scalable/apps
+      cp build/lin/vesc_tool_* $out/bin/${executableName}
+      cp ${iconPath} $out/share/icons/hicolor/scalable/apps/vesc_tool_${kind}.svg
+      echo $desktopItems
+    fi
 
     runHook postInstall
   '';

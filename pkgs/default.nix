@@ -22,6 +22,7 @@ rec {
   vesc-tool-bronze = vesc-tool.override { kind = "bronze"; };
   vesc-tool-copper = vesc-tool.override { kind = "copper"; };
   vesc-tool-free = vesc-tool.override { kind = "free"; };
+  vesc-tool-penguin = vesc-tool.override { kind = "penguin"; };
 
   bldc-fw = pkgs.callPackage ./vesc-tool/bldc-fw.nix {
     inherit fwBoards gcc-arm-embedded-7;
